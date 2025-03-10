@@ -5,10 +5,9 @@ import { Provider } from "react-redux"
 import App from "./App"
 import { store } from "./app/store"
 
-import "./index.css"
+// skip mock API setup
 
-const container = document.getElementById("root")!
-const root = createRoot(container)
+const root = createRoot(document.getElementById("root")!)
 
 root.render(
   <React.StrictMode>
