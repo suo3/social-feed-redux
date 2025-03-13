@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit"
 import type { Action } from "@reduxjs/toolkit"
-import postsReducer from "../features/posts/postsSlice"
+import alertsReducer from "../features/alerts/alertsSlice"
 
 export const store = configureStore({
   reducer: {
-    posts: postsReducer,
+    alerts: alertsReducer,
   },
 })
 

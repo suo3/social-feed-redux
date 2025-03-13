@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-import { PostsList } from "./features/posts/PostsList"
-import { AddPostForm } from "./features/posts/AddPostForm"
+import { AlertsList } from "./features/alerts/AlertsList"
+import { AddAlertForm } from "./features/alerts/AddAlertForm"
 import "./App.css"
 
 const App = () => {
@@ -12,9 +12,9 @@ const App = () => {
             path="/"
             element={
               <>
-                <AddPostForm />
+                <AddAlertForm />
                 <hr />
-                <PostsList />
+                <AlertsList />
               </>
             }
           ></Route>
