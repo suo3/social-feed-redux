@@ -1,4 +1,5 @@
 import { useAppSelector } from "@/app/hooks"
+import { Link } from "react-router-dom"
 import { Card, Container, Row } from "react-bootstrap"
 
 export const AlertsList = () => {
@@ -21,6 +22,9 @@ export const AlertsList = () => {
       <Card.Body>
         <Card.Text>{alert.content.substring(0, 100)}</Card.Text>
       </Card.Body>
+      <Card.Footer>
+        <Link to={`/alerts/${alert.id}`}>View Details</Link>
+      </Card.Footer>
     </Card>
   ))
 
