@@ -29,8 +29,8 @@ export const AlertsList = () => {
   ))
 
   return (
-    <Container className="alerts-list bg-body">
-      <h3>Alerts</h3>
+    <Container className="alerts-list">
+      <h3 className="text-white">Alerts</h3>
       <Row>{renderedAlerts}</Row>
     </Container>
   )

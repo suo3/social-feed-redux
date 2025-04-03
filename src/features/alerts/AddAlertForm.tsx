@@ -88,7 +88,13 @@ export const AddAlertForm = () => {
             />
           </Form.Group>
 
-          <Button className="mb-5" type="submit">
+          <Button
+            className="mb-5"
+            type="submit"
+            onClick={() => {
+              setOpen(!open)
+            }}
+          >
             Save Alert
           </Button>
         </Form>
