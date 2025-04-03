@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 
 import { useAppSelector } from "@/app/hooks"
 import { Card, Container, Row } from "react-bootstrap"
@@ -35,6 +35,9 @@ export const SingleAlertPage = () => {
           </Card.Header>
           <Card.Body>
             <Card.Text>{alert.content.substring(0, 100)}</Card.Text>
+            <Link to={`/editAlert/${alert.id}`} className="button">
+              Edit Alert
+            </Link>
           </Card.Body>
         </Card>
       </Row>

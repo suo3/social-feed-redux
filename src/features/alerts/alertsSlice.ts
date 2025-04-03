@@ -45,9 +45,17 @@ const alertsSlice = createSlice({
     alertAdded(state, action: PayloadAction<Alert>) {
       state.push(action.payload)
     },
+    editAlert(state, action: PayloadAction<Alert>) {
+      const {id, title, content} = action.payload
+      const existingAlert = state.find(post=>post.id ===id)
+      if(existingAlert) {
+        existingAlert.title = title
+        existingAlert.content = content
+      }
+    },
   },
 })
 
-export const {alertAdded } = alertsSlice.actions
+export const { alertAdded, alertUpdated } = alertsSlice.actions
 
 export default alertsSlice.reducer
