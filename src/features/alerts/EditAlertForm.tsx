@@ -24,16 +24,17 @@ export const EditAlertForm = () => {
     )
   }
 
-  const onSaveAlertClicked = (e: React.FormEvent<EditPostFormElements>) => {
+  const onSaveAlertClicked = (e: React.FormEvent<EditAlertFormElements>) => {
     // Prevent server submission
     e.preventDefault()
 
     const { elements } = e.currentTarget
     const title = elements.alertTitle.value
     const content = elements.alertContent.value
+    const variant = elements.alertVariant.value
 
     if (title && content) {
-      dispatch(alertUpdated({ id: alert.id, title, content }))
+      dispatch(alertUpdated({ id: alert.id, title, content , variant}))
       navigate(`/alerts/${alertId}`)
     }
   }
@@ -52,6 +53,15 @@ export const EditAlertForm = () => {
             defaultValue={alert.title}
             required
           />
+            <label htmlFor="alertVariant">Alert Type</label>
+          <input
+            type="text"
+            id="alertVariant"
+            className="form-control mb-2 text-left"
+            name="alertVariant"
+            defaultValue={alert.variant}
+            required
+          />
           <label htmlFor="alertContent">Content:</label>
           <textarea
             id="alertContent"
@@ -60,8 +70,7 @@ export const EditAlertForm = () => {
             defaultValue={alert.content}
             required
           />
-
-          <Button className="mt-3">Save Alert</Button>
+          <Button type="submit" className="mt-3">Save Alert</Button>
         </Form>
       </Card>
     </Container>

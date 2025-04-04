@@ -45,12 +45,14 @@ const alertsSlice = createSlice({
     alertAdded(state, action: PayloadAction<Alert>) {
       state.push(action.payload)
     },
-    editAlert(state, action: PayloadAction<Alert>) {
-      const {id, title, content} = action.payload
-      const existingAlert = state.find(post=>post.id ===id)
+    alertUpdated(state, action: PayloadAction<Alert>) {
+      const {id, title, content, variant} = action.payload
+      const existingAlert = state.find(alert=>alert.id ===id)
       if(existingAlert) {
+        existingAlert.id = id
         existingAlert.title = title
         existingAlert.content = content
+        existingAlert.variant = variant
       }
     },
   },
