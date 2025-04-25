@@ -1,14 +1,12 @@
 import { useParams, Link } from "react-router-dom"
-
+import { selectAlertById } from "./alertsSlice"
 import { useAppSelector } from "@/app/hooks"
 import { Card, Container, Row } from "react-bootstrap"
 
 export const SingleAlertPage = () => {
   const { alertId } = useParams()
 
-  const alert = useAppSelector(state =>
-    state.alerts.find(alert => alert.id === alertId),
-  )
+  const alert = useAppSelector(selectAlertById)
 
   if (!alert) {
     return <Container></Container>

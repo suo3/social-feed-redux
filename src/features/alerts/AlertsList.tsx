@@ -1,9 +1,10 @@
 import { useAppSelector } from "@/app/hooks"
+import { selectAllAlerts } from "./alertsSlice"
 import { Link } from "react-router-dom"
 import { Card, Container, Row } from "react-bootstrap"
 
 export const AlertsList = () => {
-  const alerts = useAppSelector(state => state.alerts)
+  const alerts = useAppSelector(selectAllAlerts)
 
   const renderedAlerts = alerts.map(alert => (
     <Card

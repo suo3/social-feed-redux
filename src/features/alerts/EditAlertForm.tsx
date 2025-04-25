@@ -2,16 +2,14 @@ import React from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Form, Button, Container, Card } from "react-bootstrap"
 import { useAppSelector, useAppDispatch } from "@/app/hooks"
-import { alertUpdated } from "./alertsSlice"
+import { alertUpdated, selectPostById } from "./alertsSlice"
 
 // omit form element types
 
 export const EditAlertForm = () => {
   const { alertId } = useParams()
 
-  const alert = useAppSelector(state =>
-    state.alerts.find(alert => alert.id === alertId),
-  )
+  const alert = useAppSelector(state=>selectPostById(state, alertId))
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -34,7 +32,7 @@ export const EditAlertForm = () => {
     const variant = elements.alertVariant.value
 
     if (title && content) {
-      dispatch(alertUpdated({ id: alert.id, title, content , variant}))
+      dispatch(alertUpdated({ id: alert.id, title, content, variant }))
       navigate(`/alerts/${alertId}`)
     }
   }
@@ -53,7 +51,7 @@ export const EditAlertForm = () => {
             defaultValue={alert.title}
             required
           />
-            <label htmlFor="alertVariant">Alert Type</label>
+          <label htmlFor="alertVariant">Alert Type</label>
           <input
             type="text"
             id="alertVariant"
@@ -70,7 +68,9 @@ export const EditAlertForm = () => {
             defaultValue={alert.content}
             required
           />
-          <Button type="submit" className="mt-3">Save Alert</Button>
+          <Button type="submit" className="mt-3">
+            Save Alert
+          </Button>
         </Form>
       </Card>
     </Container>
