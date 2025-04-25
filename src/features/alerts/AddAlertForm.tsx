@@ -2,13 +2,15 @@ import React from "react"
 import { useState } from "react"
 import { Container, Row, Form, Button } from "react-bootstrap"
 import { nanoid } from "@reduxjs/toolkit"
-import { useAppDispatch } from "@/app/hooks"
+import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { type Alert, alertAdded } from "./alertsSlice"
+import { selectAllUsers } from "@/features/users/usersSlice"
 
 interface AddAlertFormFields extends HTMLFormControlsCollection {
   alertTitle: HTMLInputElement
   alertContent: HTMLTextAreaElement
   variant: HTMLSelectElement
+  alertAuthor: HTMLSelectElement
 }
 
 interface AddAlertFormElements extends HTMLFormElement {
@@ -18,6 +20,7 @@ interface AddAlertFormElements extends HTMLFormElement {
 export const AddAlertForm = () => {
   const [open, setOpen] = useState(false)
   const dispatch = useAppDispatch()
+  const users = useAppSelector(selectAllUsers)
 
   const handleSubmit = (e: React.FormEvent<AddAlertFormElements>) => {
     e.preventDefault()
@@ -26,17 +29,24 @@ export const AddAlertForm = () => {
     const title = elements.alertTitle.value
     const content = elements.alertContent.value
     const variant = elements.variant.value
+    const user = elements.alertAuthor.value
 
     const newAlert: Alert = {
       id: nanoid(),
       title,
       content,
       variant,
+      user,
     }
     dispatch(alertAdded(newAlert))
     e.currentTarget.reset()
   }
 
+  const usersOptions = users.map(user => (
+    <option key={user.id} value={user.id}>
+      {user.name}
+    </option>
+  ))
   return (
     <Container>
       <Row>
@@ -62,6 +72,13 @@ export const AddAlertForm = () => {
               required
             />
           </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Select aria-label="Default select example" id="alertAuthor">
+              <option>Select Type</option>
+              {usersOptions}
+            </Form.Select>
+          </Form.Group>
+
           <Form.Group className="mb-3">
             <Form.Select aria-label="Default select example" id="variant">
               <option>Select Type</option>

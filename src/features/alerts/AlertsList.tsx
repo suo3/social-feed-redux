@@ -2,6 +2,7 @@ import { useAppSelector } from "@/app/hooks"
 import { selectAllAlerts } from "./alertsSlice"
 import { Link } from "react-router-dom"
 import { Card, Container, Row } from "react-bootstrap"
+import { AlertAuthor } from "./AlertAuthor"
 
 export const AlertsList = () => {
   const alerts = useAppSelector(selectAllAlerts)
@@ -22,6 +23,7 @@ export const AlertsList = () => {
       </Card.Header>
       <Card.Body>
         <Card.Text>{alert.content.substring(0, 100)}</Card.Text>
+        <AlertAuthor userId={alert.user} />
       </Card.Body>
       <Card.Footer>
         <Link to={`/alerts/${alert.id}`}>View Details</Link>

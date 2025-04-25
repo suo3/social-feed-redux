@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit"
-import type { Action } from "@reduxjs/toolkit"
 import alertsReducer from "../features/alerts/alertsSlice"
+import usersReducer from "@/features/users/usersSlice"
 
 export const store = configureStore({
   reducer: {
     alerts: alertsReducer,
+    users: usersReducer,
   },
 })
 

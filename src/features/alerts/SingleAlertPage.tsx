@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom"
 import { selectAlertById } from "./alertsSlice"
 import { useAppSelector } from "@/app/hooks"
 import { Card, Container, Row } from "react-bootstrap"
+import { AlertAuthor } from "./AlertAuthor"
 
 export const SingleAlertPage = () => {
   const { alertId } = useParams()
@@ -33,6 +34,7 @@ export const SingleAlertPage = () => {
           </Card.Header>
           <Card.Body>
             <Card.Text>{alert.content.substring(0, 100)}</Card.Text>
+            <AlertAuthor userId={alert.user} />
             <Link to={`/editAlert/${alert.id}`} className="button">
               Edit Alert
             </Link>

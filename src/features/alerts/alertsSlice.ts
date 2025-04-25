@@ -1,11 +1,15 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit"
+import type { RootState } from "@/app/store"
 
 export interface Alert {
   id: string
   title: string
   content: string
   variant: string
+  user: string
 }
+
+type AlertUpdate = Pick<Alert, "id" | "title" | "content" | "variant">
 
 const initialState: Alert[] = [
   {
@@ -14,6 +18,7 @@ const initialState: Alert[] = [
     content:
       "Some quick example text to build on the card title and make up the bulk of the card's content.",
     variant: "success",
+    user: "0",
   },
   {
     id: "2",
@@ -21,6 +26,7 @@ const initialState: Alert[] = [
     content:
       "Some quick example text to build on the card title and make up the bulk of the card's content.",
     variant: "danger",
+    user: "2",
   },
   {
     id: "3",
@@ -28,6 +34,7 @@ const initialState: Alert[] = [
     content:
       "Some quick example text to build on the card title and make up the bulk of the card's content.",
     variant: "info",
+    user: "3",
   },
   {
     id: "4",
@@ -35,6 +42,7 @@ const initialState: Alert[] = [
     content:
       "Some quick example text to build on the card title and make up the bulk of the card's content.",
     variant: "primary",
+    user: "4",
   },
 ]
 
@@ -45,7 +53,18 @@ const alertsSlice = createSlice({
     alertAdded(state, action: PayloadAction<Alert>) {
       state.push(action.payload)
     },
-    alertUpdated(state, action: PayloadAction<Alert>) {
+    prepare(title: string, content: string, variant: string, userId: string) {
+      return {
+        payload: {
+          id: nanoid(),
+          title,
+          content,
+          variant,
+          user: userId,
+        },
+      }
+    },
+    alertUpdated(state, action: PayloadAction<AlertUpdate>) {
       const { id, title, content, variant } = action.payload
       const existingAlert = state.find(alert => alert.id === id)
       if (existingAlert) {
@@ -64,5 +83,5 @@ export default alertsSlice.reducer
 
 export const selectAllAlerts = (state: RootState) => state.alerts
 
-export const selectAlertById = (state: RootState, postId: string) =>
+export const selectAlertById = (state: RootState, alertId: string) =>
   state.alerts.find(alert => alert.id === alertId)
