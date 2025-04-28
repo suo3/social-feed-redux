@@ -3,11 +3,12 @@ import { selectAlertById } from "./alertsSlice"
 import { useAppSelector } from "@/app/hooks"
 import { Card, Container, Row } from "react-bootstrap"
 import { AlertAuthor } from "./AlertAuthor"
+import { selectUserById } from "../users/usersSlice"
 
 export const SingleAlertPage = () => {
   const { alertId } = useParams()
 
-  const alert = useAppSelector(selectAlertById)
+  const alert = useAppSelector(state => selectAlertById(state, alertId!))
 
   if (!alert) {
     return <Container></Container>
