@@ -1,5 +1,6 @@
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit"
 import type { RootState } from "@/app/store"
+import { sub } from "date-fns"
 
 export interface Alert {
   id: string
@@ -7,6 +8,7 @@ export interface Alert {
   content: string
   variant: string
   user: string
+  date: string
 }
 
 type AlertUpdate = Pick<Alert, "id" | "title" | "content" | "variant">
@@ -19,6 +21,7 @@ const initialState: Alert[] = [
       "Some quick example text to build on the card title and make up the bulk of the card's content.",
     variant: "success",
     user: "0",
+    date: sub(new Date(), { minutes: 5 }).toISOString(),
   },
   {
     id: "2",
@@ -27,6 +30,7 @@ const initialState: Alert[] = [
       "Some quick example text to build on the card title and make up the bulk of the card's content.",
     variant: "danger",
     user: "2",
+    date: sub(new Date(), { minutes: 5 }).toISOString(),
   },
   {
     id: "3",
@@ -35,6 +39,7 @@ const initialState: Alert[] = [
       "Some quick example text to build on the card title and make up the bulk of the card's content.",
     variant: "info",
     user: "3",
+    date: sub(new Date(), { minutes: 5 }).toISOString(),
   },
   {
     id: "4",
@@ -43,6 +48,7 @@ const initialState: Alert[] = [
       "Some quick example text to build on the card title and make up the bulk of the card's content.",
     variant: "primary",
     user: "4",
+    date: sub(new Date(), { minutes: 5 }).toISOString(),
   },
 ]
 
@@ -61,6 +67,7 @@ const alertsSlice = createSlice({
           content,
           variant,
           user: userId,
+          date: new Date().toISOString(),
         },
       }
     },

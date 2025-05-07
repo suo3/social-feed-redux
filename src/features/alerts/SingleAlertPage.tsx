@@ -3,6 +3,7 @@ import { selectAlertById } from "./alertsSlice"
 import { useAppSelector } from "@/app/hooks"
 import { Card, Container, Row } from "react-bootstrap"
 import { AlertAuthor } from "./AlertAuthor"
+import { TimeAgo } from "./TimeAgo"
 import { selectUserById } from "../users/usersSlice"
 
 export const SingleAlertPage = () => {
@@ -36,6 +37,7 @@ export const SingleAlertPage = () => {
           <Card.Body>
             <Card.Text>{alert.content.substring(0, 100)}</Card.Text>
             <AlertAuthor userId={alert.user} />
+            <TimeAgo timestamp={alert.date} />
             <Link to={`/editAlert/${alert.id}`} className="button">
               Edit Alert
             </Link>

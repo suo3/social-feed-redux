@@ -2,14 +2,16 @@ import React from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Form, Button, Container, Card } from "react-bootstrap"
 import { useAppSelector, useAppDispatch } from "@/app/hooks"
-import { alertUpdated, selectPostById } from "./alertsSlice"
+import { alertUpdated, selectAlertById } from "./alertsSlice"
 
-// omit form element types
+interface EditAlertFormElements {
+  elements: any
+}
 
 export const EditAlertForm = () => {
   const { alertId } = useParams()
 
-  const alert = useAppSelector(state=>selectPostById(state, alertId))
+  const alert = useAppSelector(state => selectAlertById(state, alertId!))
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
