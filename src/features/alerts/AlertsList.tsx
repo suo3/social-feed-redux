@@ -8,7 +8,11 @@ import { TimeAgo } from "./TimeAgo"
 export const AlertsList = () => {
   const alerts = useAppSelector(selectAllAlerts)
 
-  const renderedAlerts = alerts.map(alert => (
+  const orderedAlerts = alerts
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date))
+
+  const renderedAlerts = orderedAlerts.map(alert => (
     <Card
       bg={"dark"}
       key={alert.variant}
